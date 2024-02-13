@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
+apply from: "$rootDir/dependencies.gradle"
 
 android {
     namespace 'com.base.core'
@@ -27,6 +28,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -37,4 +42,28 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleExtensionsVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlinReflectVersion"
+
+    // retrofit + gson + okhttp
+    implementation "com.google.code.gson:gson:$versions.gsonConverterVersion"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.rxjavaAdapterVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.gsonConverterVersion"
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$versions.urlConnectionVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptorVersion"
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$versions.lottieVersion"
+
+    //Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$versions.navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$versions.navVersion")
+
 }
