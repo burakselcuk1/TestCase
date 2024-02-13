@@ -9,12 +9,12 @@ apply from: "$rootDir/dependencies.gradle"
 
 android {
     namespace 'com.example.testcase'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.testcase"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -25,14 +25,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://5fc9346b2af77700165ae514.mockapi.io/"'
+        }
+        debug {
+            buildConfigField 'String', 'BASE_URL', '"https://5fc9346b2af77700165ae514.mockapi.io/"'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     buildFeatures{
         viewBinding true
