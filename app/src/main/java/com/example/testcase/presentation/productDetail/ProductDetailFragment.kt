@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.base.core.BaseFragment
+import com.bumptech.glide.Glide
 import com.example.testcase.R
 import com.example.testcase.databinding.FragmentProductDetailBinding
 import com.example.testcase.databinding.FragmentProductMainFragmentBinding
@@ -19,9 +20,18 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding,ProductD
 ) {
     override fun onInitDataBinding() {
 
-        val productName = arguments?.getParcelable<ProductUiModel>("product")
-        if (productName != null) {
-            binding.topbarProductName.text = productName.name
+        val product = arguments?.getParcelable<ProductUiModel>("product")
+        if (product != null) {
+            with(binding){
+                topbarProductName.text = product.name
+                productDetailName.text = product.name
+                productDetailDescription.text = product.description
+                price.text = product.price
+
+                Glide.with(productDetailImage.context)
+                    .load(product.image)
+                    .into(productDetailImage)
+            }
         }
         setListeners()
     }

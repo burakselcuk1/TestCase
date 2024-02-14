@@ -18,5 +18,8 @@
     <!-- PRODUCT ITEM LAYOUT -->
     <string name="add_to_basket">ADD TO BASKET</string>
 
+    <!-- PRODUCT DETAIL FRAGMENT -->
+    <string name="price">Price:</string>
+
 
 </resources>
