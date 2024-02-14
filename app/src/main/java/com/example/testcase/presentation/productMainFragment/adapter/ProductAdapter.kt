@@ -3,6 +3,7 @@ package com.example.testcase.presentation.productMainFragment.adapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,7 +12,8 @@ import com.example.testcase.data.response.Products
 import com.example.testcase.databinding.ProductItemLayoutBinding
 import com.example.testcase.presentation.productMainFragment.model.ProductUiModel
 
-class ProductAdapter(private val productList: MutableList<ProductUiModel>) :
+class ProductAdapter(private val productList: MutableList<ProductUiModel>,
+                     private val onButtonClick: (ProductUiModel) -> Unit) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -50,6 +52,9 @@ class ProductAdapter(private val productList: MutableList<ProductUiModel>) :
                     .into(productImage)
                 textViewPrice.text = product.price
                 textViewTitle.text = product.name
+                binding.buttonAddToCart.setOnClickListener {
+                    onButtonClick(product)
+                }
             }
         }
         init {

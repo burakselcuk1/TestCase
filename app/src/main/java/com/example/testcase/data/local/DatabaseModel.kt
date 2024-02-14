@@ -1,15 +1,16 @@
-package com.example.testcase.presentation.productMainFragment.model
+package com.example.testcase.data.local
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.testcase.data.response.Products
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
+@Entity(tableName = "product_database")
 @Parcelize
-data class ProductUiModel(
+data class DatabaseModel(
+    @PrimaryKey(autoGenerate = true)
+    val dbId : Int = 0,
     val id: String,
     val name: String,
     val image: String,
@@ -19,4 +20,3 @@ data class ProductUiModel(
     val brand: String,
     val createdAt: String
 ) : Parcelable
-

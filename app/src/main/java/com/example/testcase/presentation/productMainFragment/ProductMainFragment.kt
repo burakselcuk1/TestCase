@@ -11,6 +11,7 @@ import com.base.core.BaseFragment
 import com.example.testcase.R
 import com.example.testcase.common.OnDataSendListener
 import com.example.testcase.common.Resource
+import com.example.testcase.data.local.DatabaseModel
 import com.example.testcase.databinding.FragmentProductMainFragmentBinding
 import com.example.testcase.presentation.filterBottomSheet.FilterBottomSheetFragment
 import com.example.testcase.presentation.productMainFragment.adapter.ProductAdapter
@@ -67,6 +68,12 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
         })
     }
 
+    private fun saveToDb(product: ProductUiModel) {
+        val dbProduct = DatabaseModel(product.id.toInt(),product.model,product.name,product.image,product.price,
+            product.description,product.model,product.brand,product.createdAt)
+    viewModel.insertToDb(dbProduct)
+    }
+
     private fun setObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.products.collect { resources ->
@@ -78,7 +85,10 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
                         binding.progressBar.visibility = View.GONE
                         val productList = resources.data
                         if (!productList.isNullOrEmpty()) {
-                                productAdapter = ProductAdapter(productList.toMutableList())
+                                productAdapter = ProductAdapter(productList.toMutableList()){clickedItem ->
+                                    Toast.makeText(context, "${getString(R.string.added_to_db)}  ${clickedItem.name}", Toast.LENGTH_SHORT).show()
+                                    saveToDb(clickedItem)
+                                }
                                 val layoutManager = GridLayoutManager(requireContext(), 2)
                                 binding.productRcv.layoutManager = layoutManager
                                 binding.productRcv.adapter = productAdapter
@@ -108,7 +118,10 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
                         val productList = resources.data
                         if (!productList.isNullOrEmpty()) {
                             if (!::productAdapter.isInitialized) {
-                                productAdapter = ProductAdapter(productList.toMutableList())
+                                productAdapter = ProductAdapter(productList.toMutableList()){clickedItem ->
+                                    Toast.makeText(context, "${getString(R.string.added_to_db)}  ${clickedItem.name}", Toast.LENGTH_SHORT).show()
+                                    saveToDb(clickedItem)
+                                }
                                 val layoutManager = GridLayoutManager(requireContext(), 2)
                                 binding.productRcv.layoutManager = layoutManager
                                 binding.productRcv.adapter = productAdapter
