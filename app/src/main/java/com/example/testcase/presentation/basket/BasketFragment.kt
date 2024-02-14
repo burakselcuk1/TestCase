@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.core.BaseFragment
 import com.base.core.BaseViewModel
 import com.example.testcase.R
+import com.example.testcase.common.PriceCalculator
 import com.example.testcase.data.local.DatabaseModel
 import com.example.testcase.databinding.FragmentBasketBinding
 import com.example.testcase.presentation.basket.adapter.DbAdapter
@@ -26,7 +27,7 @@ class BasketFragment : BaseFragment<FragmentBasketBinding, BasketViewModel>(
     private lateinit var dbAdapter: DbAdapter
     override fun onInitDataBinding() {
         viewModel.readAllData.observe(viewLifecycleOwner, Observer { data ->
-            val totalPrice = calculateTotalPrice(data)
+            val totalPrice = PriceCalculator.calculateTotalPrice(data)
             binding.totalPrice.text = totalPrice.toString()
 
             dbAdapter = DbAdapter(data)
@@ -36,14 +37,5 @@ class BasketFragment : BaseFragment<FragmentBasketBinding, BasketViewModel>(
             binding.dbRecyclerview.adapter = dbAdapter
 
         })
-    }
-
-    fun calculateTotalPrice(databaseModels: List<DatabaseModel>): Double {
-        var totalPrice = 0.0
-
-        for (item in databaseModels) {
-            totalPrice += item.price.toDoubleOrNull() ?: 0.0
-        }
-        return totalPrice
     }
 }
