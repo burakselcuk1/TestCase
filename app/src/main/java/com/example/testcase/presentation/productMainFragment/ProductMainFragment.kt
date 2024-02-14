@@ -11,9 +11,6 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
     viewModelClass = ProductMainViewModel::class.java
 ) {
     override fun onInitDataBinding() {
-        binding.buton.setOnClickListener {
-            viewModel.getProducts()
 
-        }
     }
 }
