@@ -21,5 +21,9 @@
     <!-- PRODUCT DETAIL FRAGMENT -->
     <string name="price">Price:</string>
 
+    <!-- BOTTOM SHEET FRAGMENT -->
+    <string name="mercedes">Mercedes</string>
+    <string name="ford">Ford</string>
+
 
 </resources>

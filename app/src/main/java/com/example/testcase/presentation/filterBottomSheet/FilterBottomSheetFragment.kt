@@ -2,12 +2,9 @@ package com.example.testcase.presentation.filterBottomSheet
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.testcase.R
 import com.example.testcase.common.OnDataSendListener
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.testcase.databinding.FragmentFilterBottomSheetBinding
@@ -49,8 +46,8 @@ class FilterBottomSheetFragment(private var listener: OnDataSendListener) : Bott
            dismiss()
         }
 
-        binding.renaultButton.setOnClickListener {
-            listener.onRenaultButtonClicked()
+        binding.fordButton.setOnClickListener {
+            listener.onFordButtonClicked()
             dismiss()
         }
     }

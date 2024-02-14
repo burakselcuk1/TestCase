@@ -142,12 +142,14 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
     }
 
     override fun onMercedesButtonClicked() {
-        Toast.makeText(requireContext(),"mercedes tıklandı",Toast.LENGTH_SHORT).show()
+        viewModel.searchProducts("mercedes")
+        setObserversForSearch()
+
     }
 
-    override fun onRenaultButtonClicked() {
-        Toast.makeText(requireContext(),"reno tıklandı",Toast.LENGTH_SHORT).show()
-    }
+    override fun onFordButtonClicked() {
+        viewModel.searchProducts("ford")
+        setObserversForSearch()    }
 
     companion object {
         const val LIMIT_PER_PAGE = 8
