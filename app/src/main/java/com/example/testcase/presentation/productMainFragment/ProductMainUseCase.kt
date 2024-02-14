@@ -21,4 +21,15 @@ class ProductMainUseCase @Inject constructor(
                 emit(Resource.Error(resource.throwable))
             }
         }.flowOn(Dispatchers.IO)
+
+    suspend fun getSearchProducts(name: String): Flow<Resource<MutableList<ProductUiModel>>> =
+        flow {
+            val resource = repository.getSearchProduct(name)
+            if (resource is Resource.Success) {
+                emit(Resource.Success(resource.data))
+            } else if (resource is Resource.Error) {
+                emit(Resource.Error(resource.throwable))
+            }
+        }.flowOn(Dispatchers.IO)
+
 }

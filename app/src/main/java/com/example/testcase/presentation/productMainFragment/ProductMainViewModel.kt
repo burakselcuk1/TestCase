@@ -17,10 +17,21 @@ class ProductMainViewModel @Inject constructor(
     private val _products: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = MutableStateFlow(null)
     val products: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = _products
 
+    private val _searchProducts: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = MutableStateFlow(null)
+    val searchProducts: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = _searchProducts
+
     fun getProducts(page: Int, limit: Int){
         viewModelScope.launch {
             productUseCase.getProducts(page, limit).collect { result ->
                 _products.emit(result)
+            }
+        }
+    }
+
+    fun searchProducts(name: String){
+        viewModelScope.launch {
+            productUseCase.getSearchProducts(name).collect { result ->
+                _searchProducts.emit(result)
             }
         }
     }

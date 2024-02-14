@@ -29,8 +29,15 @@ class ProductAdapter(private val productList: MutableList<ProductUiModel>) :
 
     fun addNewData(newData: List<ProductUiModel>) {
         productList.addAll(newData)
-        notifyDataSetChanged() // RecyclerView'e değişiklikleri bildir
+        notifyDataSetChanged()
     }
+
+    fun setData(newData: List<ProductUiModel>) {
+        productList.clear()
+        productList.addAll(newData)
+        notifyDataSetChanged()
+    }
+
 
     inner class ProductViewHolder(private val binding: ProductItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: ProductUiModel) {

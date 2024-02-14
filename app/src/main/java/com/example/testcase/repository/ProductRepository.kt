@@ -5,4 +5,5 @@ import com.example.testcase.presentation.productMainFragment.model.ProductUiMode
 
 interface ProductRepository {
     suspend fun getProduct(page: Int, limit: Int): Resource<MutableList<ProductUiModel>>
+    suspend fun getSearchProduct(name: String): Resource<MutableList<ProductUiModel>>
 }

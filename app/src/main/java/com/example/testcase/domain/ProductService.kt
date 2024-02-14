@@ -12,4 +12,10 @@ interface ProductService {
         @Query("page") page: Int,
         @Query("limit") limit: Int
     ): MutableList<ProductsApiModel>
+
+
+    @GET("products")
+    suspend fun getSearchProducts(
+        @Query("name") name: String
+    ): MutableList<ProductsApiModel>
 }

@@ -19,4 +19,12 @@ class ProductRepositoryImpl @Inject constructor(
     }catch (e: Exception){
         Resource.Error(e)
     }
+
+    override suspend fun getSearchProduct(name: String): Resource<MutableList<ProductUiModel>>  = try {
+        val response = productService.getSearchProducts(name)
+        val uiModel = mapper.mapToProductUiModel(response)
+        Resource.Success(uiModel)
+    }catch (e: Exception){
+        Resource.Error(e)
+    }
 }

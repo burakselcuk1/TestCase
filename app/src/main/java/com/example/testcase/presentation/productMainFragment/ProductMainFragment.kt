@@ -2,6 +2,7 @@ package com.example.testcase.presentation.productMainFragment
 
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,7 +28,18 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
     override fun onInitDataBinding() {
         viewModel.getProducts(1, LIMIT_PER_PAGE)
         setObservers()
+        setListeners()
         recyclerviewScroolListener()
+    }
+
+    private fun setListeners() {
+        binding.searchEditText.addTextChangedListener {text ->
+            val query = text.toString().trim()
+            viewModel.searchProducts(query)
+            binding.productRcv.clearOnScrollListeners()
+            binding.searchEditText.clearFocus()
+        }
+        setObserversForSearch()
     }
 
     private fun recyclerviewScroolListener() {
@@ -59,16 +71,46 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
                         binding.progressBar.visibility = View.GONE
                         val productList = resources.data
                         if (!productList.isNullOrEmpty()) {
+                                productAdapter = ProductAdapter(productList.toMutableList())
+                                val layoutManager = GridLayoutManager(requireContext(), 2)
+                                binding.productRcv.layoutManager = layoutManager
+                                binding.productRcv.adapter = productAdapter
+
+                        }
+                    }
+                    is Resource.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), resources.toString(), Toast.LENGTH_SHORT).show()
+                    }
+
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun setObserversForSearch() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.searchProducts.collect { resources ->
+                when (resources) {
+                    is Resource.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    is Resource.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        val productList = resources.data
+                        if (!productList.isNullOrEmpty()) {
                             if (!::productAdapter.isInitialized) { // productAdapter henüz başlatılmamışsa
                                 productAdapter = ProductAdapter(productList.toMutableList())
                                 val layoutManager = GridLayoutManager(requireContext(), 2)
                                 binding.productRcv.layoutManager = layoutManager
                                 binding.productRcv.adapter = productAdapter
                             } else {
-                                productAdapter.addNewData(productList)
+                                productAdapter.setData(productList) // setData metodunu çağırarak verileri güncelle
                             }
                         }
                     }
+
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(requireContext(), resources.toString(), Toast.LENGTH_SHORT).show()
@@ -88,7 +130,12 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
     companion object {
         const val LIMIT_PER_PAGE = 8
     }
 }
+
