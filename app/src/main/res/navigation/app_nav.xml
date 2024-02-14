@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/productMainFragment"
         android:name="com.example.testcase.presentation.productMainFragment.ProductMainFragment"
-        android:label="ProductMainFragmentFragment" />
+        android:label="ProductMainFragmentFragment" >
+        <action
+            android:id="@+id/action_productMainFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.example.testcase.presentation.basket.BasketFragment"
@@ -24,4 +28,9 @@
         android:name="com.example.testcase.presentation.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.testcase.presentation.productDetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
 </navigation>

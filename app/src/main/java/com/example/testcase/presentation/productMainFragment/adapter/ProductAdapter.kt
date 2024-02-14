@@ -1,7 +1,9 @@
 package com.example.testcase.presentation.productMainFragment.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.testcase.R
@@ -48,6 +50,21 @@ class ProductAdapter(private val productList: MutableList<ProductUiModel>) :
                     .into(productImage)
                 textViewPrice.text = product.price
                 textViewTitle.text = product.name
+            }
+        }
+        init {
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val clickedItem = productList[position]
+                    val bundle = Bundle().apply {
+                        putParcelable("product", clickedItem)
+                    }
+                    itemView.findNavController().navigate(
+                        R.id.action_productMainFragment_to_productDetailFragment,
+                        bundle
+                    )
+                }
             }
         }
     }
