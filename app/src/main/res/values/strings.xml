@@ -26,5 +26,8 @@
     <string name="mercedes">Mercedes</string>
     <string name="ford">Ford</string>
 
+    <!-- BASKET FRAGMENT -->
+    <string name="total">Total:</string>
+
 
 </resources>
