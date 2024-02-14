@@ -29,5 +29,12 @@
     <!-- BASKET FRAGMENT -->
     <string name="total">Total:</string>
 
+    <!-- DB ITEM LAYOUT -->
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="count">1</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="price_db">Price</string>
+
 
 </resources>
