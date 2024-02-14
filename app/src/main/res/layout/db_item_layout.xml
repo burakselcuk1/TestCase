@@ -54,6 +54,7 @@
                     tools:layout_editor_absoluteX="152dp" />
 
                 <TextView
+                    android:id="@+id/db_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/textSize20"

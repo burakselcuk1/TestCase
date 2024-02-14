@@ -9,7 +9,7 @@ import com.example.testcase.presentation.productMainFragment.model.ProductUiMode
 @Dao
 interface Dao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertToDb(dbValue: DatabaseModel)
 
     @Query("SELECT * FROM product_database ORDER BY dbId ASC")
