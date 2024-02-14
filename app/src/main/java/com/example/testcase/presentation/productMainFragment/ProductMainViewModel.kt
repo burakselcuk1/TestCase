@@ -14,8 +14,8 @@ class ProductMainViewModel @Inject constructor(
     private val productUseCase: ProductMainUseCase
 ): BaseViewModel() {
 
-    private val _products: MutableStateFlow<Resource<ProductUiModel>?> = MutableStateFlow(null)
-    val products: MutableStateFlow<Resource<ProductUiModel>?> = _products
+    private val _products: MutableStateFlow<Resource<List<ProductUiModel>>?> = MutableStateFlow(null)
+    val products: MutableStateFlow<Resource<List<ProductUiModel>>?> = _products
 
     fun getProducts(){
         viewModelScope.launch {

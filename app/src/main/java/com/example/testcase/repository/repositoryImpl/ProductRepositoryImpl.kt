@@ -12,7 +12,7 @@ class ProductRepositoryImpl @Inject constructor(
     private val mapper: ProductUiMapper
 ) : ProductRepository {
 
-    override suspend fun getProduct(): Resource<ProductUiModel>? = try {
+    override suspend fun getProduct(): Resource<List<ProductUiModel>> = try {
         val response = productService.getProducts()
         val uiModel = mapper.mapToProductUiModel(response)
         Resource.Success(uiModel)

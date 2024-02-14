@@ -13,6 +13,7 @@
     <string name="search">Search</string>
     <string name="filters">Filters:</string>
     <string name="select_filter">Select Filter</string>
+    <string name="error">Something went wrong. Please try again</string>
 
     <!-- PRODUCT ITEM LAYOUT -->
     <string name="add_to_basket">ADD TO BASKET</string>

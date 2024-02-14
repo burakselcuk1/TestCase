@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ProductMainUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    suspend fun getProducts(): Flow<Resource<ProductUiModel>> =
+    suspend fun getProducts(): Flow<Resource<List<ProductUiModel>>> =
         flow {
             val resource = repository.getProduct()
             if (resource is Resource.Success) {
