@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.base.core.BaseFragment
 import com.example.testcase.R
+import com.example.testcase.common.OnDataSendListener
 import com.example.testcase.common.Resource
 import com.example.testcase.databinding.FragmentProductMainFragmentBinding
+import com.example.testcase.presentation.filterBottomSheet.FilterBottomSheetFragment
 import com.example.testcase.presentation.productMainFragment.adapter.ProductAdapter
 import com.example.testcase.presentation.productMainFragment.model.ProductUiModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +23,7 @@ import kotlinx.coroutines.launch
 class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,ProductMainViewModel>(
     layoutId = R.layout.fragment_product_main_fragment,
     viewModelClass = ProductMainViewModel::class.java
-) {
+), OnDataSendListener {
     private lateinit var productAdapter: ProductAdapter
     private var currentPageNumber = 1
 
@@ -40,6 +42,12 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
             binding.searchEditText.clearFocus()
         }
         setObserversForSearch()
+        binding.filter.setOnClickListener {
+            val bottomSheetFragment = FilterBottomSheetFragment(this)
+            bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
+
+
+        }
     }
 
     private fun recyclerviewScroolListener() {
@@ -131,6 +139,14 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
 
     override fun onDestroyView() {
         super.onDestroyView()
+    }
+
+    override fun onMercedesButtonClicked() {
+        Toast.makeText(requireContext(),"mercedes tıklandı",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRenaultButtonClicked() {
+        Toast.makeText(requireContext(),"reno tıklandı",Toast.LENGTH_SHORT).show()
     }
 
     companion object {
