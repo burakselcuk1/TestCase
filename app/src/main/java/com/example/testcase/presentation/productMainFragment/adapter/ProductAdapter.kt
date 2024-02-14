@@ -9,7 +9,7 @@ import com.example.testcase.data.response.Products
 import com.example.testcase.databinding.ProductItemLayoutBinding
 import com.example.testcase.presentation.productMainFragment.model.ProductUiModel
 
-class ProductAdapter(private val productList: List<ProductUiModel>) :
+class ProductAdapter(private val productList: MutableList<ProductUiModel>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -25,6 +25,11 @@ class ProductAdapter(private val productList: List<ProductUiModel>) :
 
     override fun getItemCount(): Int {
         return productList.size
+    }
+
+    fun addNewData(newData: List<ProductUiModel>) {
+        productList.addAll(newData)
+        notifyDataSetChanged() // RecyclerView'e değişiklikleri bildir
     }
 
     inner class ProductViewHolder(private val binding: ProductItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {

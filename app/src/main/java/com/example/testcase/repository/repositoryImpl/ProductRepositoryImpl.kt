@@ -12,8 +12,8 @@ class ProductRepositoryImpl @Inject constructor(
     private val mapper: ProductUiMapper
 ) : ProductRepository {
 
-    override suspend fun getProduct(): Resource<List<ProductUiModel>> = try {
-        val response = productService.getProducts()
+    override suspend fun getProduct(page: Int, limit: Int): Resource<MutableList<ProductUiModel>> = try {
+        val response = productService.getProducts(page, limit)
         val uiModel = mapper.mapToProductUiModel(response)
         Resource.Success(uiModel)
     }catch (e: Exception){

@@ -5,7 +5,7 @@ import com.example.testcase.data.response.ProductsApiModel
 
 class ProductUiMapper {
 
-    fun mapToProductUiModel(apiModel: List<ProductsApiModel>): List<ProductUiModel> {
+    fun mapToProductUiModel(apiModel: MutableList<ProductsApiModel>): MutableList<ProductUiModel> {
         val productUiModelList = mutableListOf<ProductUiModel>()
         for (apiProduct in apiModel) {
             val productUiModel = ProductUiModel(

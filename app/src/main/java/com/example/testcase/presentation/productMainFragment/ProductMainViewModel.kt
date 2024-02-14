@@ -14,12 +14,12 @@ class ProductMainViewModel @Inject constructor(
     private val productUseCase: ProductMainUseCase
 ): BaseViewModel() {
 
-    private val _products: MutableStateFlow<Resource<List<ProductUiModel>>?> = MutableStateFlow(null)
-    val products: MutableStateFlow<Resource<List<ProductUiModel>>?> = _products
+    private val _products: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = MutableStateFlow(null)
+    val products: MutableStateFlow<Resource<MutableList<ProductUiModel>>?> = _products
 
-    fun getProducts(){
+    fun getProducts(page: Int, limit: Int){
         viewModelScope.launch {
-            productUseCase.getProducts().collect { result ->
+            productUseCase.getProducts(page, limit).collect { result ->
                 _products.emit(result)
             }
         }
