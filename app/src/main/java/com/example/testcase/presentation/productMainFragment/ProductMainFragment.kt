@@ -53,7 +53,6 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
                 val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
 
                 if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0) {
-                    // Scroll'un sonuna geldiğinde yeni sayfa yükle
                     fetchNextPage()
                 }
             }
@@ -100,13 +99,13 @@ class ProductMainFragment : BaseFragment<FragmentProductMainFragmentBinding,Prod
                         binding.progressBar.visibility = View.GONE
                         val productList = resources.data
                         if (!productList.isNullOrEmpty()) {
-                            if (!::productAdapter.isInitialized) { // productAdapter henüz başlatılmamışsa
+                            if (!::productAdapter.isInitialized) {
                                 productAdapter = ProductAdapter(productList.toMutableList())
                                 val layoutManager = GridLayoutManager(requireContext(), 2)
                                 binding.productRcv.layoutManager = layoutManager
                                 binding.productRcv.adapter = productAdapter
                             } else {
-                                productAdapter.setData(productList) // setData metodunu çağırarak verileri güncelle
+                                productAdapter.setData(productList)
                             }
                         }
                     }
